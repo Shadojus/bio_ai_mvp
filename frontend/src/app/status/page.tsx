@@ -1,11 +1,13 @@
+// File: /frontend/src/app/status/page.tsx
+
 "use client";
 
 import { useEffect, useState } from "react";
 
 interface HealthResponse {
   API: string;
-  Database: string;
-  AI_Modules: string;
+  Active_State: string;
+  Last_Updated: string;
 }
 
 export default function StatusDashboard() {
@@ -16,9 +18,6 @@ export default function StatusDashboard() {
     async function fetchHealth() {
       try {
         const response = await fetch("http://localhost:8000/health");
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
         const data: HealthResponse = await response.json();
         setStatus(data);
       } catch (error) {
@@ -43,17 +42,15 @@ export default function StatusDashboard() {
   return (
     <div className="p-4">
       <h1 className="text-3xl font-bold mb-6">System Status</h1>
-      <div className="space-y-4">
-        <p className="text-lg">
-          <strong>API:</strong> {status.API}
-        </p>
-        <p className="text-lg">
-          <strong>Database:</strong> {status.Database}
-        </p>
-        <p className="text-lg">
-          <strong>AI Modules:</strong> {status.AI_Modules}
-        </p>
-      </div>
+      <p className="text-lg">
+        <strong>API:</strong> {status.API}
+      </p>
+      <p className="text-lg">
+        <strong>Active State:</strong> {status.Active_State}
+      </p>
+      <p className="text-lg">
+        <strong>Last Updated:</strong> {status.Last_Updated}
+      </p>
     </div>
   );
 }
