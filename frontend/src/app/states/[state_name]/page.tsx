@@ -1,4 +1,4 @@
-// Path: C:\Users\dariu\OneDrive\00 The Game\BioAi\BioAi_MVP\frontend\src\app\states\[state_name]\page.tsx
+// \frontend\src\app\states\[state_name]\page.tsx
 
 "use client";
 

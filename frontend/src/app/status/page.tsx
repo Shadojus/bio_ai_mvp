@@ -1,4 +1,4 @@
-// File: /frontend/src/app/status/page.tsx
+// /frontend/src/app/status/page.tsx
 
 "use client";
 

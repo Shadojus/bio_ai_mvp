@@ -1,4 +1,4 @@
-// File: /frontend/src/app/layout.tsx
+// /frontend/src/app/layout.tsx
 
 import type { Metadata } from "next";
 import "./globals.css";
