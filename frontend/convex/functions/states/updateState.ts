@@ -15,7 +15,7 @@ export const updateState = mutation({
   handler: async (ctx, { stateName, content, authorId, createdAt }) => {
     // Check if a state with the given title already exists
     const existingState = await ctx.db
-      .query("posts")
+      .query("states")
       .filter((q) => q.eq(q.field("title"), stateName))
       .first();
 
@@ -27,11 +27,12 @@ export const updateState = mutation({
       });
     } else {
       // Insert a new state
-      await ctx.db.insert("posts", {
+      await ctx.db.insert("states", {
         title: stateName,
         content,
         authorId,
         createdAt,
+        lastUpdated: Date.now(),
       });
     }
 

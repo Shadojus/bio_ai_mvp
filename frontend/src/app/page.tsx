@@ -2,6 +2,7 @@
 "use client";
 
 import Link from "next/link";
+import InitializeData from "./components/InitializeData";
 
 export default function Home() {
   return (
@@ -36,6 +37,7 @@ export default function Home() {
             Check overall system health and status
           </p>
         </Link>
+        <InitializeData />
       </div>
     </div>
   );

@@ -22,6 +22,7 @@ export const getLatestBiometrics = query({
         focusScore: 80,
         energyLevel: 70,
         lastProcessed: true,
+        lastUpdated: 5,
       };
     }
 
@@ -41,6 +42,7 @@ export const generateBiometricData = mutation({
       focusScore: Math.random() * 100,
       energyLevel: Math.random() * 100,
       lastProcessed: false,
+      lastUpdated: Math.random() * 10,
     };
 
     const id = await ctx.db.insert("biometrics", data);

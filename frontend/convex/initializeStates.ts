@@ -35,7 +35,13 @@ export const initializeStates = mutation({
 
     // Insert all states
     for (const state of states) {
-      await ctx.db.insert("states", state);
+      await ctx.db.insert("states", {
+        title: "State Title",
+        content: "State Content",
+        authorId: "some-author-id",
+        createdAt: Date.now(),
+        lastUpdated: Date.now(), // Add this field
+      });
     }
 
     return { status: "States initialized successfully" };

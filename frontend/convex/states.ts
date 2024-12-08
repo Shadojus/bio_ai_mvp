@@ -8,6 +8,7 @@ interface StateDefinition {
   content: string;
   description: string;
   applications: string[];
+  lastUpdated: string;
   metrics: {
     transitionEfficiency: number;
     userSatisfaction: number;
@@ -20,6 +21,7 @@ const STATE_DEFINITIONS: Record<string, StateDefinition> = {
     title: "Deep Blue",
     content: "High cognitive tasks, strategic planning, and intense focus.",
     description: "Optimized for complex problem-solving and strategic work.",
+    lastUpdated: "5",
     applications: [
       "Planning and analysis tasks",
       "Collaboration between User, GPT and Claude for decision-making",
@@ -33,6 +35,7 @@ const STATE_DEFINITIONS: Record<string, StateDefinition> = {
     title: "Green",
     content: "Biological health, stress recovery, and energy restoration.",
     description: "Focus on physical wellbeing and recovery.",
+    lastUpdated: "5",
     applications: [
       "Physical activity and rest routines",
       "Stress management protocols",
@@ -46,6 +49,7 @@ const STATE_DEFINITIONS: Record<string, StateDefinition> = {
     title: "Purple",
     content: "Knowledge acquisition, creative thinking, and reflective tasks.",
     description: "Optimized for learning and creative work.",
+    lastUpdated: "5",
     applications: [
       "Tutorials and educational content",
       "AI-assisted knowledge synthesis",
@@ -59,6 +63,7 @@ const STATE_DEFINITIONS: Record<string, StateDefinition> = {
     title: "Orange",
     content: "Social engagement, communication, and teamwork.",
     description: "Focused on collaboration and social interaction.",
+    lastUpdated: "5",
     applications: [
       "Stakeholder meetings",
       "Social media and content generation",
@@ -73,6 +78,7 @@ const STATE_DEFINITIONS: Record<string, StateDefinition> = {
     content: "System health, baseline checks, and environmental optimization.",
     description: "System maintenance and optimization.",
     applications: ["Sensor maintenance", "System diagnostics"],
+    lastUpdated: "5",
     metrics: {
       transitionEfficiency: 95,
       userSatisfaction: 90,
@@ -83,6 +89,7 @@ const STATE_DEFINITIONS: Record<string, StateDefinition> = {
     content: "High-priority alerts and critical interventions.",
     description: "Emergency response and critical situations.",
     applications: ["Security breaches", "Health-related emergencies"],
+    lastUpdated: "5",
     metrics: {
       transitionEfficiency: 95,
       userSatisfaction: 90,
@@ -92,6 +99,7 @@ const STATE_DEFINITIONS: Record<string, StateDefinition> = {
     title: "Customization",
     content: "User-defined states for personalized interactions.",
     description: "Personalized state configurations.",
+    lastUpdated: "5",
     applications: [
       "Real-time adjustments to workflows",
       "User preference management",
@@ -145,6 +153,7 @@ export const initializeStates = mutation({
         content: state.content,
         authorId: "system",
         createdAt: Date.now(),
+        lastUpdated: Date.now(),
       });
     }
 
@@ -174,7 +183,9 @@ export const transitionState = mutation({
       fromState,
       toState,
       reason,
+      priority: 1,
       timestamp: Date.now(),
+      lastUpdated: Date.now(),
     });
 
     return { status: "success", newState: toState };
