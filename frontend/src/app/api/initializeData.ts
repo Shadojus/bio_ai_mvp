@@ -1,24 +1,26 @@
-// File: app/api/initializeData.ts
-import { NextApiRequest, NextApiResponse } from "next";
-import { initializeBiometricThresholds } from "../../../convex/biometricTresholds";
+// frontend/src/app/components/InitializeData.tsx
+"use client";
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  if (req.method === "POST") {
-    try {
-      await initializeBiometricThresholds();
-      res
-        .status(200)
-        .json({ message: "Biometric thresholds initialized successfully." });
-    } catch (error) {
-      console.error("Error initializing biometric thresholds:", error);
-      res
-        .status(500)
-        .json({ message: "Error initializing biometric thresholds." });
-    }
-  } else {
-    res.status(405).json({ message: "Method not allowed. Use POST." });
-  }
+import { useEffect } from "react";
+import { useMutation } from "convex/react";
+import { api } from "../../../convex/_generated/api";
+
+export default function InitializeData() {
+  const initThresholds = useMutation(
+    api.tresholds.initializeBiometricThresholds
+  );
+
+  useEffect(() => {
+    const initialize = async () => {
+      try {
+        const result = await initThresholds();
+        console.log("Initialization result:", result);
+      } catch (error) {
+        console.error("Initialization failed:", error);
+      }
+    };
+    initialize();
+  }, [initThresholds]);
+
+  return null;
 }

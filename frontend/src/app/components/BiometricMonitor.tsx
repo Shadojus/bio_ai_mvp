@@ -1,8 +1,8 @@
-// frontend/src/components/BiometricMonitor.tsx
+// frontend/src/app/components/BiometricMonitor.tsx
 "use client";
 
 import React, { useEffect } from "react";
-import { useMutation, useQuery } from "convex/react";
+import { useQuery, useMutation } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import {
   LineChart,
@@ -17,19 +17,22 @@ import {
 
 export default function BiometricMonitor() {
   const generateData = useMutation(api.biometrics.generateBiometricData);
-  const processData = useMutation(api.biometrics.processBiometricData);
   const latestData = useQuery(api.biometrics.getLatestBiometrics, {
     userId: "dummy-user-id",
   });
 
+  // Generate data every 10 seconds
   useEffect(() => {
     const interval = setInterval(async () => {
-      await generateData({ userId: "dummy-user-id" });
-      await processData({ userId: "dummy-user-id" }); // Process data after generation
+      try {
+        await generateData({ userId: "dummy-user-id" });
+      } catch (error) {
+        console.error("Error generating biometric data:", error);
+      }
     }, 10000);
 
     return () => clearInterval(interval);
-  }, [generateData, processData]);
+  }, [generateData]);
 
   if (!latestData) return <div>Loading biometric data...</div>;
 

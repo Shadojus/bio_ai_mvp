@@ -9,32 +9,20 @@ export default defineSchema({
     email: v.string(),
     createdAt: v.number(),
   }),
-  posts: defineTable({
-    title: v.string(),
-    content: v.string(),
-    authorId: v.string(),
-    createdAt: v.number(),
-  }),
   states: defineTable({
     title: v.string(),
     content: v.string(),
     authorId: v.string(),
     createdAt: v.number(),
   }),
-  stateTransitions: defineTable({
-    fromState: v.string(),
-    toState: v.string(),
-    reason: v.string(),
-    timestamp: v.number(),
-  }),
   biometrics: defineTable({
     userId: v.string(),
     timestamp: v.number(),
     heartRate: v.number(),
-    stressLevel: v.number(), // 0-100
-    activityLevel: v.number(), // 0-100
-    focusScore: v.number(), // 0-100
-    energyLevel: v.number(), // 0-100
+    stressLevel: v.number(),
+    activityLevel: v.number(),
+    focusScore: v.number(),
+    energyLevel: v.number(),
     lastProcessed: v.boolean(),
   }),
   biometricThresholds: defineTable({
