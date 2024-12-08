@@ -15,21 +15,18 @@ const StateDetailsPage = () => {
     : "Default";
 
   const [error, setError] = useState<string | null>(null);
-  const [initialized, setInitialized] = useState(false);
 
-  // Get the initialization mutation
-  const initialize = useMutation(api.states.initializeStates);
-  // Get state details
+  // Get state details first
   const stateConfig = useQuery(api.states.getStateDetails, { stateName });
+
+  // If stateConfig is null, try initializing
+  const initialize = useMutation(api.states.initializeStates);
 
   useEffect(() => {
     const initStates = async () => {
-      if (!initialized) {
+      if (!stateConfig) {
         try {
-          const result = await initialize();
-          if (result.status === "initialized" || result.status === "exists") {
-            setInitialized(true);
-          }
+          await initialize();
         } catch (err) {
           console.error("Initialization error:", err);
           setError("Failed to initialize states");
@@ -38,16 +35,7 @@ const StateDetailsPage = () => {
     };
 
     initStates();
-  }, [initialize, initialized]);
-
-  if (!initialized) {
-    return (
-      <div className="p-4">
-        <h1 className="text-2xl font-bold mb-4">Initializing States...</h1>
-        <p>Please wait while we set up the system.</p>
-      </div>
-    );
-  }
+  }, [initialize, stateConfig]);
 
   if (error) {
     return (
@@ -58,7 +46,18 @@ const StateDetailsPage = () => {
     );
   }
 
-  if (!stateConfig) {
+  // Show loading state while querying
+  if (stateConfig === undefined) {
+    return (
+      <div className="p-4">
+        <h1 className="text-2xl font-bold mb-4">Loading State Details...</h1>
+        <p>Please wait while we fetch the state information.</p>
+      </div>
+    );
+  }
+
+  // Show not found if query completes but returns null
+  if (stateConfig === null) {
     return (
       <div className="p-4">
         <h1 className="text-2xl font-bold mb-4">State Not Found</h1>
