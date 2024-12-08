@@ -1,6 +1,6 @@
-// frontend\src\app\states\page.tsx
-
 "use client";
+
+// frontend\src\app\states\page.tsx
 
 import Link from "next/link";
 

@@ -1,6 +1,5 @@
-# /backend/requirements.txt
-
 fastapi
 pydantic
 python-dotenv
 uvicorn
+httpx

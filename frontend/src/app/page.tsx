@@ -1,4 +1,4 @@
-// File: frontend/src/app/layout.tsx
+// /frontend/src/app/page.tsx
 "use client";
 
 import Link from "next/link";
