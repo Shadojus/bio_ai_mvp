@@ -10,7 +10,8 @@ const StateDetailsPage = () => {
   const { state_name } = useParams();
   const stateName = state_name
     ? decodeURIComponent(state_name as string)
-        .replace(/([A-Z])/g, " $1")
+        .replace(/([A-Z])/g, " $1") // Add space before capital letters
+        .replace(/^./, (str) => str.toUpperCase()) // Capitalize first letter
         .trim()
     : "Default";
 
