@@ -16,6 +16,7 @@ import type {
 import type * as biometrics from "../biometrics.js";
 import type * as functions_states_updateState from "../functions/states/updateState.js";
 import type * as initializeStates from "../initializeStates.js";
+import type * as stateManager from "../stateManager.js";
 import type * as states from "../states.js";
 import type * as stateTransitions from "../stateTransitions.js";
 import type * as tresholds from "../tresholds.js";
@@ -32,6 +33,7 @@ declare const fullApi: ApiFromModules<{
   biometrics: typeof biometrics;
   "functions/states/updateState": typeof functions_states_updateState;
   initializeStates: typeof initializeStates;
+  stateManager: typeof stateManager;
   states: typeof states;
   stateTransitions: typeof stateTransitions;
   tresholds: typeof tresholds;

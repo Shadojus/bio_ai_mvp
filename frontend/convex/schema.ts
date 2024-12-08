@@ -1,4 +1,4 @@
-// frontend/convex/schema.ts
+// /frontend/convex/schema.ts
 
 import { defineSchema, defineTable } from "convex/server";
 import { v } from "convex/values";
@@ -14,6 +14,13 @@ export default defineSchema({
     content: v.string(),
     authorId: v.string(),
     createdAt: v.number(),
+  }),
+  stateTransitions: defineTable({
+    fromState: v.string(),
+    toState: v.string(),
+    reason: v.string(),
+    timestamp: v.number(),
+    priority: v.number(),
   }),
   biometrics: defineTable({
     userId: v.string(),
@@ -34,6 +41,9 @@ export default defineSchema({
     minActivityLevel: v.number(),
     maxActivityLevel: v.number(),
     minFocusScore: v.number(),
+    maxFocusScore: v.number(),
     minEnergyLevel: v.number(),
+    maxEnergyLevel: v.number(),
+    lastUpdated: v.number(),
   }),
 });
